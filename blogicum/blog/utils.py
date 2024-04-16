@@ -4,8 +4,6 @@ from django.utils import timezone
 
 
 class PublishedQuerySet(models.QuerySet):
-    """Менеджер публикации."""
-
     def filter_posts_for_publication(self):
         return self.filter(
             pub_date__lte=timezone.now(),

@@ -9,8 +9,6 @@ User = get_user_model()  # получение модели пользовате�
 
 
 class Category(CreatedAt, IsPublished):
-    """Модель категории."""
-
     title = models.CharField('Заголовок', max_length=MAX_LENGTH)
     description = models.TextField('Описание')
     slug = models.SlugField(
@@ -29,8 +27,6 @@ class Category(CreatedAt, IsPublished):
 
 
 class Location(CreatedAt, IsPublished):
-    """Модель местоположения."""
-
     name = models.CharField('Название места', max_length=MAX_LENGTH)
 
     class Meta:
@@ -42,8 +38,6 @@ class Location(CreatedAt, IsPublished):
 
 
 class Post(CreatedAt, IsPublished):
-    """Модель поста."""
-
     title = models.CharField('Заголовок', max_length=MAX_LENGTH)
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
@@ -88,8 +82,6 @@ class Post(CreatedAt, IsPublished):
 
 
 class Comment(CreatedAt):
-    """Модель комментария."""
-
     text = models.TextField('Текст')
     post = models.ForeignKey(
         Post,

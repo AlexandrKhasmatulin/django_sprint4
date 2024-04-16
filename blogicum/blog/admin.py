@@ -9,8 +9,6 @@ from .models import Category, Comment, Location, Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    """Кастомизация админки для модели Post."""
-
     list_display = (
         'title',
         'text_short',
@@ -44,7 +42,6 @@ class PostAdmin(admin.ModelAdmin):
     @staticmethod
     @admin.display(description='Текст')
     def text_short(obj: Post) -> str:
-        """Укороченное описание поста для отображения в админке."""
         return f'{obj.text[:LENGTH_STRING_ADMIN]}...'
 
     @admin.display(description='Автор')
@@ -59,7 +56,6 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    """Кастомизация админки для модели Category."""
 
     list_display = (
         'title',
@@ -80,14 +76,11 @@ class CategoryAdmin(admin.ModelAdmin):
     @staticmethod
     @admin.display(description='Описание')
     def description_short(obj: Category) -> str:
-        """Укороченное названия категории для отображения в админке."""
         return f'{obj.description[:LENGTH_STRING_ADMIN]}...'
 
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    """Кастомизация админки для модели Location."""
-
     list_display = (
         'name',
         'is_published',
@@ -100,8 +93,6 @@ class LocationAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    """Кастомизация админки для модели Comment."""
-
     list_display = (
         'text',
         'post',
