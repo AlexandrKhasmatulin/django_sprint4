@@ -3,8 +3,9 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from .constants import LENGTH_STRING_ADMIN, NUMBER_OF_POSTS
-from .models import Category, Comment, Location, Post
+from blog.constants import LENGTH_STRING_ADMIN
+from blog.models import Category, Comment, Location, Post
+from blogicum.settings import NUMBER_OF_POSTS
 
 
 @admin.register(Post)

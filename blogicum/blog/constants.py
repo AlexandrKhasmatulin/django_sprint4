@@ -1,4 +1,5 @@
-NUMBER_OF_POSTS: int = 10  # Количество постов на странице
-MAX_LENGTH: int = 256  # Максимальное количество символов в поле
-LENGTH_STRING: int = 20  # Длина среза для отображения строкового имени объекта
-LENGTH_STRING_ADMIN: int = 50  # Длина среза для отображения полей в админке
+MAX_LENGTH_POST = 256
+MAX_LENGTH_LOCATION = 256
+MAX_LENGTH_CATEGORY = 256
+LENGTH_STRING: int = 20
+LENGTH_STRING_ADMIN: int = 50

@@ -3,13 +3,13 @@ from django.db import models
 
 from blog.utils import PublishedQuerySet
 from core.models import CreatedAt, IsPublished
-from blog.constants import LENGTH_STRING, MAX_LENGTH
+from blog.constants import LENGTH_STRING, MAX_LENGTH_CATEGORY, MAX_LENGTH_LOCATION, MAX_LENGTH_POST
 
 User = get_user_model()  # получение модели пользователя
 
 
 class Category(CreatedAt, IsPublished):
-    title = models.CharField('Заголовок', max_length=MAX_LENGTH)
+    title = models.CharField('Заголовок', max_length=MAX_LENGTH_CATEGORY)
     description = models.TextField('Описание')
     slug = models.SlugField(
         'Идентификатор',
@@ -27,7 +27,7 @@ class Category(CreatedAt, IsPublished):
 
 
 class Location(CreatedAt, IsPublished):
-    name = models.CharField('Название места', max_length=MAX_LENGTH)
+    name = models.CharField('Название места', max_length=MAX_LENGTH_LOCATION)
 
     class Meta:
         verbose_name = 'местоположение'
@@ -38,7 +38,7 @@ class Location(CreatedAt, IsPublished):
 
 
 class Post(CreatedAt, IsPublished):
-    title = models.CharField('Заголовок', max_length=MAX_LENGTH)
+    title = models.CharField('Заголовок', max_length=MAX_LENGTH_POST)
     text = models.TextField('Текст')
     pub_date = models.DateTimeField(
         'Дата и время публикации',

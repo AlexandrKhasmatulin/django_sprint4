@@ -4,10 +4,10 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
-from .constants import NUMBER_OF_POSTS
-from .forms import CommentForm, PostForm
-from .mixins import PostMixin, CommentMixin, AuthorMixin
-from .models import Category, Post
+from blogicum.settings import NUMBER_OF_POSTS
+from blog.forms import CommentForm, PostForm
+from blog.mixins import PostMixin, CommentMixin, AuthorMixin
+from blog.models import Category, Post
 
 
 class IndexListView(ListView):
@@ -21,11 +21,11 @@ class PostDetailView(ListView):
     paginate_by = NUMBER_OF_POSTS
 
     def get_object(self):
-        post = get_object_or_404(Post, pk=self.kwargs['post_id'])
+        post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
         if self.request.user == post.author:
             return post
         return get_object_or_404(Post.objects.filter_posts_for_publication(),
-                                 pk=self.kwargs['post_id'])
+                                 pk=self.kwargs.get('post_id'))
 
     def get_queryset(self):
         return self.get_object().comments.all()
@@ -50,7 +50,7 @@ class CommentCreateView(CommentMixin, CreateView):
         form.instance.author = self.request.user
         form.instance.post = get_object_or_404(
             Post.objects.filter_posts_for_publication(),
-            pk=self.kwargs['post_id']
+            pk=self.kwargs.get('post_id')
         )
         return super().form_valid(form)
 
@@ -100,7 +100,7 @@ class ProfileView(ListView):
     paginate_by = NUMBER_OF_POSTS
 
     def get_profile(self):
-        return get_object_or_404(User, username=self.kwargs['username'])
+        return get_object_or_404(User, username=self.kwargs.get('username'))
 
     def get_queryset(self):
         author = self.get_profile()
@@ -126,4 +126,4 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('blog:profile',
-                       kwargs={'username': self.kwargs[self.slug_url_kwarg]})
+                       kwargs={'username': self.kwargs.get(self.slug_url_kwarg)})

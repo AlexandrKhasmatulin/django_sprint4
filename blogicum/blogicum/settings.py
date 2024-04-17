@@ -132,3 +132,5 @@ EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 CSRF_FAILURE_VIEW = 'pages.views.csrf_failure'
 
 LOGIN_REDIRECT_URL = 'blog:index'
+
+NUMBER_OF_POSTS: int = 10
